@@ -8,7 +8,6 @@ export default function App() {
         <View style={s.container}>
             <Header />
             <View style={s.page}>
-                <DefaultText>Привет, мир!</DefaultText>
             </View>
             <StatusBar style="auto" />
         </View>

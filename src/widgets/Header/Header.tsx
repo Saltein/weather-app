@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
-import { DefaultText } from "../../shared";
+import { DefaultText, DropDown } from "../../shared";
 
 export const Header = () => {
     return (
         <View style={s.header}>
-            <DefaultText>Погода</DefaultText>
+            <DropDown />
         </View>
     );
 };
@@ -15,5 +15,6 @@ const s = StyleSheet.create({
         backgroundColor: "transparent",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "row",
     },
 });
