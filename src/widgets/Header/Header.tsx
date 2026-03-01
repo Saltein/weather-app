@@ -11,7 +11,6 @@ export const Header = () => {
 
 const s = StyleSheet.create({
     header: {
-        height: 48,
         backgroundColor: "transparent",
         alignItems: "center",
         justifyContent: "center",

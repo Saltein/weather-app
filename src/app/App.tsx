@@ -1,16 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { Header } from "../widgets";
-import { DefaultText, styles } from "../shared";
+import { Header, Weather } from "../widgets";
+import { styles } from "../shared";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 export default function App() {
     return (
-        <View style={s.container}>
-            <Header />
-            <View style={s.page}>
+        <Provider store={store}>
+            <View style={s.container}>
+                <Header />
+                <View style={s.pageSpace}>
+                    <Weather />
+                </View>
+                <StatusBar style="auto" />
             </View>
-            <StatusBar style="auto" />
-        </View>
+        </Provider>
     );
 }
 
@@ -20,7 +25,9 @@ const s = StyleSheet.create({
         backgroundColor: styles.colors.backgroundMain,
         color: styles.colors.textMain,
     },
-    page: {
+    pageSpace: {
         flex: 1,
+        marginTop: styles.spacing.xxs,
+        marginHorizontal: styles.spacing.md,
     },
 });

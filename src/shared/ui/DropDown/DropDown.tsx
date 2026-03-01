@@ -4,22 +4,39 @@ import { DefaultText } from "../DefaultText/DefaultText";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { City, russianCities } from "../../consts/russianCities";
 import { DefaultTextInput } from "../DefaultTextInput/DefaultTextInput";
+import { useDispatch } from "react-redux";
+import {
+    selectSelectedCity,
+    setCity,
+} from "../../../entities/city/model/slice";
+import { useSelector } from "react-redux";
 
 export const DropDown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+
+    const selectedCity = useSelector(selectSelectedCity);
+
+    const dispatch = useDispatch();
 
     const handleCitySelect = (city: City) => {
-        setSelectedCity(city);
-        setSearchQuery("");
+        dispatch(setCity(city));
+        setSearchQuery(city.name);
+        setIsOpen(false);
+    };
+
+    const handleInputChange = (text: string) => {
+        setSearchQuery(text);
+        dispatch(setCity(null));
+        setIsOpen(text.length > 0);
     };
 
     const filteredCities = useMemo(() => {
-        const filtered = russianCities.filter((city: City) =>
+        if (!searchQuery) return [];
+
+        return russianCities.filter((city: City) =>
             city.name.toLowerCase().includes(searchQuery.toLowerCase()),
         );
-        return filtered;
     }, [searchQuery]);
 
     const RenderItem = useCallback(
@@ -33,25 +50,21 @@ export const DropDown = () => {
         [],
     );
 
-    useEffect(() => {
-        if (selectedCity) {
-            setIsOpen(false);
-        } else if (searchQuery) {
-            setIsOpen(true);
-        }
-    }, [selectedCity]);
+    const displayValue = selectedCity ? selectedCity.name : searchQuery;
 
     return (
         <View style={s.wrapper}>
             <View style={s.openButton}>
                 <DefaultTextInput
                     placeholder="Город"
-                    value={searchQuery}
-                    onChangeText={setSearchQuery}
+                    value={displayValue}
+                    onChangeText={handleInputChange}
+                    onFocus={() => setIsOpen(true)}
+                    onBlur={() => setIsOpen(false)}
                 />
             </View>
 
-            {searchQuery && (
+            {isOpen && (
                 <View style={s.listContainer}>
                     {filteredCities.length === 0 ? (
                         <DefaultText style={s.cityItem}>
@@ -62,9 +75,12 @@ export const DropDown = () => {
                             data={filteredCities}
                             renderItem={RenderItem}
                             keyExtractor={(item) =>
-                                item.name + item.subject + item.population
+                                item.name +
+                                item.subject +
+                                (item.population ?? "")
                             }
                             style={s.list}
+                            keyboardShouldPersistTaps="handled"
                         />
                     )}
                 </View>
@@ -97,17 +113,17 @@ const s = StyleSheet.create({
         height: 40,
         flex: 1,
         backgroundColor: styles.colors.backgroundSurface,
-        borderRadius: styles.radius.xl,
+        borderRadius: styles.radius.md,
         borderWidth: 1,
-        borderColor: "#444",
-        margin: 4,
+        borderColor: styles.colors.border,
+        margin: styles.spacing.sm,
     },
     openButton: {
         width: "100%",
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: 16,
+        paddingHorizontal: styles.spacing.md,
     },
     title: {
         fontSize: 18,
@@ -118,9 +134,9 @@ const s = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: styles.colors.backgroundSurface,
-        borderRadius: styles.radius.xl,
+        borderRadius: styles.radius.md,
         borderWidth: 1,
-        borderColor: "#444",
+        borderColor: styles.colors.border,
         zIndex: 10,
         overflow: "hidden",
         maxHeight: 320,
@@ -129,7 +145,6 @@ const s = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.25,
         shadowRadius: 6,
-
         // Android
         elevation: 6,
     },
@@ -140,7 +155,7 @@ const s = StyleSheet.create({
     cityItem: {
         height: 40,
         textAlignVertical: "center",
-        paddingHorizontal: 16,
+        paddingHorizontal: styles.spacing.md,
         fontSize: 16,
     },
 });
