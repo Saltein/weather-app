@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { styles } from "../../shared";
-import { LinearGradient } from "react-native-svg";
 
 export const s = StyleSheet.create({
     container: {
@@ -50,10 +49,11 @@ export const s = StyleSheet.create({
         borderColor: styles.colors.border,
         paddingLeft: styles.spacing.md,
         paddingBottom: styles.spacing.xs,
+        maxWidth: "50%",
     },
 
     weatherDescription: {
-        fontSize: 24,
+        fontSize: 14,
     },
 
     windAndHumidity: {

@@ -1,8 +1,8 @@
 export const styles = {
     colors: {
-        backgroundMain: "#8aa8cc",
-        backgroundSurface: "#a5bdda",
-        backgroundItems: "#c1d1e5",
+        backgroundMain: "#7597c1",
+        backgroundSurface: "#8caacf",
+        backgroundItems: "#a6bedb",
         textMain: "#fff",
         textMuted: "#fffa",
         border: "#e0ecf9",

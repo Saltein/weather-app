@@ -119,7 +119,12 @@ export const Weather = () => {
                 {Icon ? (
                     <View style={s.weatherCode}>
                         <Icon width={80} height={80} />
-                        <DefaultText style={s.weatherDescription}>
+                        <DefaultText
+                            style={s.weatherDescription}
+                            numberOfLines={2}
+                            ellipsizeMode="tail"
+                            textBreakStrategy="simple"
+                        >
                             {weatherDescription ?? "Неизвестная погода"}
                         </DefaultText>
                     </View>
