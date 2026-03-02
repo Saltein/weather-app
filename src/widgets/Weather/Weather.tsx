@@ -9,46 +9,14 @@ import { s } from "./WeatherStyles";
 import { weatherCodes, weatherIcons } from "./consts/weatherCodes";
 import { hourlyWeatherToArrayOfObjects } from "../../shared/lib/hourlyWeatherToArrayOfObjects";
 import { HourWeatherCard } from "../../entities/hourWeather/ui/HourWeatherCard/HourWeatherCard";
+import { useWeatherQueryParams } from "../../features/weather/model/consts/useWeatherQueryParams";
 
 export const Weather = () => {
-    const city = useSelector(selectSelectedCity);
-
-    const queryParams = useMemo(() => {
-        if (!city?.coords?.lat || !city?.coords?.lon) {
-            return skipToken;
-        }
-
-        return {
-            latitude: parseFloat(city.coords.lat),
-            longitude: parseFloat(city.coords.lon),
-            timezone: "auto",
-            daily: [
-                "temperature_2m_max",
-                "temperature_2m_min",
-                "weather_code",
-                "sunrise",
-                "sunset",
-            ],
-            hourly: [
-                "temperature_2m",
-                "relative_humidity_2m",
-                "weather_code",
-                "wind_speed_10m",
-            ],
-            current: [
-                "temperature_2m",
-                "relative_humidity_2m",
-                "weather_code",
-                "wind_speed_10m",
-            ],
-            forecast_days: 7,
-        };
-    }, [city]);
+    const queryParams = useWeatherQueryParams();
 
     const { data, isLoading, isFetching, error, isError } = useGetWeatherQuery(
         queryParams,
         {
-            refetchOnMountOrArgChange: true,
             refetchOnFocus: true,
             refetchOnReconnect: true,
         },
@@ -111,7 +79,7 @@ export const Weather = () => {
     }
     const hourlyWeather = hourlyWeatherToArrayOfObjects(
         data ? data : undefined,
-    ).slice(hours);
+    ).slice(hours, hours + 24);
 
     return (
         <View style={s.container}>

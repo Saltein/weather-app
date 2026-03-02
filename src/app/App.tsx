@@ -4,6 +4,7 @@ import { Header, Weather } from "../widgets";
 import { styles } from "../shared";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { DailyWeatherList } from "../widgets/DailyWeatherList/DailyWeatherList";
 
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
                 <Header />
                 <View style={s.pageSpace}>
                     <Weather />
+                    <DailyWeatherList />
                 </View>
                 <StatusBar style="auto" />
             </View>

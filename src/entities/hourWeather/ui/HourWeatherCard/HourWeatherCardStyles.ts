@@ -29,19 +29,12 @@ export const s = StyleSheet.create({
 
     dateTimeContainer: {
         alignItems: "center",
-        paddingHorizontal: styles.spacing.xxs,
-        paddingBottom: styles.spacing.xxs,
+        padding: styles.spacing.xxs,
         gap: 0,
     },
 
-    date: {
-        fontSize: 12,
-        lineHeight: 12,
-        color: styles.colors.textMuted,
-    },
-
     time: {
-        fontSize: 18,
-        lineHeight: 14,
+        fontSize: 20,
+        lineHeight: 16,
     },
 });

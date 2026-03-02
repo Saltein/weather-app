@@ -39,7 +39,6 @@ export const HourWeatherCard = ({ hourlyWeather }: HourWeatherCardProps) => {
                 style={s.windHumidity}
             >{`${Math.round((wind_speed_10m * 10) / 3.6) / 10} м/с ${relative_humidity_2m}%`}</DefaultText>
             <View style={s.dateTimeContainer}>
-                <DefaultText style={s.date}>{day}</DefaultText>
                 <DefaultText style={s.time}>{timeNew}</DefaultText>
             </View>
         </View>
