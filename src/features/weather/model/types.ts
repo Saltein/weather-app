@@ -24,7 +24,7 @@ export interface WeatherResponse {
         weather_code: string;
         wind_speed_10m: string;
     };
-    current?: {
+    current: {
         time: string;
         interval: number;
         temperature_2m: number;
@@ -32,12 +32,15 @@ export interface WeatherResponse {
         weather_code: number;
         wind_speed_10m: number;
     };
-    hourly?: {
+    hourly: {
         time: string[];
-        temperature_2m?: number[];
+        temperature_2m: number[];
+        relative_humidity_2m: number[];
+        weather_code: number[];
+        wind_speed_10m: number[];
         // ... другие массивы
     };
-    daily?: {
+    daily: {
         time: string[];
         temperature_2m_max?: number[];
         temperature_2m_min?: number[];

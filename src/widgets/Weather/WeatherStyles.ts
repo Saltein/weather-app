@@ -5,7 +5,7 @@ export const s = StyleSheet.create({
     container: {
         alignItems: "center",
         width: "100%",
-        height: 320,
+        height: 280,
         borderBottomWidth: 1,
         borderRadius: styles.radius.sm,
         borderColor: styles.colors.border,
@@ -68,5 +68,9 @@ export const s = StyleSheet.create({
         paddingVertical: styles.spacing.xs,
 
         borderRadius: styles.radius.lg,
+    },
+
+    hourlyWeatherListContent: {
+        gap: styles.spacing.xs,
     },
 });

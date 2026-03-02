@@ -1,5 +1,5 @@
-import { StyleSheet, View } from "react-native";
-import { DefaultText, styles } from "../../shared";
+import { FlatList, View } from "react-native";
+import { DefaultText } from "../../shared";
 import { useGetWeatherQuery } from "../../features/weather/model/weatherApiSlice";
 import { selectSelectedCity } from "../../entities/city/model/slice";
 import { useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { useEffect, useMemo } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { s } from "./WeatherStyles";
 import { weatherCodes, weatherIcons } from "./consts/weatherCodes";
+import { hourlyWeatherToArrayOfObjects } from "../../shared/lib/hourlyWeatherToArrayOfObjects";
+import { HourWeatherCard } from "../../entities/hourWeather/ui/HourWeatherCard/HourWeatherCard";
 
 export const Weather = () => {
     const city = useSelector(selectSelectedCity);
@@ -39,14 +41,14 @@ export const Weather = () => {
                 "weather_code",
                 "wind_speed_10m",
             ],
-            forecast_days: 7,
+            forecast_days: 3,
         };
     }, [city]);
 
     const { data, isLoading, isFetching, error, isError } = useGetWeatherQuery(
         queryParams,
         {
-            refetchOnMountOrArgChange: true, // refetch при смене аргумента, даже если данные свежие
+            refetchOnMountOrArgChange: true,
             refetchOnFocus: true,
             refetchOnReconnect: true,
         },
@@ -102,6 +104,10 @@ export const Weather = () => {
     const Icon =
         weatherCode !== undefined ? weatherIcons[weatherCode] : undefined;
 
+    const hourlyWeather = hourlyWeatherToArrayOfObjects(
+        data ? data : undefined,
+    );
+
     return (
         <View style={s.container}>
             <View style={s.mainInfo}>
@@ -129,7 +135,7 @@ export const Weather = () => {
                         </DefaultText>
                     </View>
                 ) : (
-                    <DefaultText>?</DefaultText>
+                    <DefaultText>?</DefaultText> // заменить на компонент заглушку
                 )}
             </View>
 
@@ -137,6 +143,15 @@ export const Weather = () => {
                 <DefaultText>Ветер: {windSpeed ?? "—"} м/с</DefaultText>
                 <DefaultText>Влажность: {humidity ?? "—"}%</DefaultText>
             </View>
+            <FlatList
+                data={hourlyWeather}
+                renderItem={({ item }) => (
+                    <HourWeatherCard hourlyWeather={item} />
+                )}
+                keyExtractor={(item) => item.time + item.temperature_2m}
+                horizontal
+                contentContainerStyle={s.hourlyWeatherListContent}
+            />
         </View>
     );
 };
