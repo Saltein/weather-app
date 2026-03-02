@@ -104,8 +104,11 @@ export const Weather = () => {
     const Icon =
         weatherCode !== undefined ? weatherIcons[weatherCode] : undefined;
 
-    const now = new Date();
-    const hours = now.getHours();
+    let hours = 0;
+    if (data?.current?.time) {
+        const now = new Date(data.current.time);
+        hours = now.getHours();
+    }
     const hourlyWeather = hourlyWeatherToArrayOfObjects(
         data ? data : undefined,
     ).slice(hours);
