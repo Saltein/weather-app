@@ -3,7 +3,8 @@ import { styles } from "../../shared";
 
 export const s = StyleSheet.create({
     container: {
-        marginTop: styles.spacing.sm,
+        marginVertical: styles.spacing.sm,
+        flex: 1,
     },
     dailyWeatherListContent: {
         gap: styles.spacing.xs,

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { Header, Weather } from "../widgets";
 import { styles } from "../shared";
 import { Provider } from "react-redux";
@@ -7,9 +7,11 @@ import { store } from "./store";
 import { DailyWeatherList } from "../widgets/DailyWeatherList/DailyWeatherList";
 
 export default function App() {
+    const { height } = useWindowDimensions();
+
     return (
         <Provider store={store}>
-            <View style={s.container}>
+            <View style={[s.container, { height: height }]}>
                 <Header />
                 <View style={s.pageSpace}>
                     <Weather />
@@ -23,7 +25,6 @@ export default function App() {
 
 const s = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: styles.colors.backgroundMain,
         color: styles.colors.textMain,
     },
