@@ -7,7 +7,6 @@ export const s = StyleSheet.create({
         width: "100%",
         height: 280,
         borderBottomWidth: 1,
-        borderRadius: styles.radius.sm,
         borderColor: styles.colors.border,
     },
 
@@ -16,9 +15,10 @@ export const s = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
+        height: 124,
 
         backgroundColor: styles.colors.backgroundSurface,
-        paddingHorizontal: styles.spacing.md,
+        paddingLeft: styles.spacing.md,
 
         borderRadius: styles.radius.lg,
     },
@@ -28,6 +28,7 @@ export const s = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: styles.spacing.xs,
+        flex: 1,
     },
 
     minMaxTemp: {
@@ -47,7 +48,7 @@ export const s = StyleSheet.create({
         marginLeft: styles.spacing.md,
         borderLeftWidth: 1,
         borderColor: styles.colors.border,
-        paddingLeft: styles.spacing.md,
+        paddingHorizontal: styles.spacing.md,
         paddingBottom: styles.spacing.xs,
         maxWidth: "50%",
     },

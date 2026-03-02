@@ -41,7 +41,7 @@ export const Weather = () => {
                 "weather_code",
                 "wind_speed_10m",
             ],
-            forecast_days: 3,
+            forecast_days: 7,
         };
     }, [city]);
 
@@ -104,9 +104,11 @@ export const Weather = () => {
     const Icon =
         weatherCode !== undefined ? weatherIcons[weatherCode] : undefined;
 
+    const now = new Date();
+    const hours = now.getHours();
     const hourlyWeather = hourlyWeatherToArrayOfObjects(
         data ? data : undefined,
-    );
+    ).slice(hours);
 
     return (
         <View style={s.container}>
