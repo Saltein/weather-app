@@ -1,15 +1,23 @@
 import { View } from "react-native";
 import { s } from "./HourWeatherCardStyles";
 import { weatherIcons } from "../../../../widgets/Weather/consts/weatherCodes";
-import { DefaultText } from "../../../../shared";
+import { DefaultText, Skeleton } from "../../../../shared";
 import { HourlyWeather } from "../../../../shared/lib/hourlyWeatherToArrayOfObjects";
 import { formatDateTime } from "../../../../shared/lib/formatDateTime";
 
 interface HourWeatherCardProps {
-    hourlyWeather: HourlyWeather;
+    hourlyWeather?: HourlyWeather;
+    isLoading?: boolean;
 }
 
-export const HourWeatherCard = ({ hourlyWeather }: HourWeatherCardProps) => {
+export const HourWeatherCard = ({
+    hourlyWeather,
+    isLoading = false,
+}: HourWeatherCardProps) => {
+    if (!hourlyWeather || isLoading) {
+        return <Skeleton style={s.container} />;
+    }
+
     const {
         time,
         weather_code,

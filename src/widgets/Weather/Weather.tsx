@@ -1,9 +1,7 @@
 import { FlatList, View } from "react-native";
-import { DefaultText } from "../../shared";
+import { DefaultText, Skeleton } from "../../shared";
 import { useGetWeatherQuery } from "../../features/weather/model/weatherApiSlice";
-import { selectSelectedCity } from "../../entities/city/model/slice";
-import { useSelector } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { s } from "./WeatherStyles";
 import { weatherCodes, weatherIcons } from "./consts/weatherCodes";
@@ -30,7 +28,9 @@ export const Weather = () => {
         // нет координат для запроса погоды
         return (
             <View style={s.container}>
-                <DefaultText>Город не выбран</DefaultText>
+                <DefaultText style={{ fontSize: 24 }}>
+                    Выберите город
+                </DefaultText>
             </View>
         );
     }
@@ -39,9 +39,17 @@ export const Weather = () => {
         // при загрузке данных
         return (
             <View style={s.container}>
-                <DefaultText style={{ marginTop: 12 }}>
-                    Загрузка погоды...
-                </DefaultText>
+                <Skeleton style={s.mainInfo} />
+                <Skeleton
+                    style={[s.windAndHumidity, { height: 35, width: 220 }]}
+                />
+                <FlatList
+                    data={Array.from({ length: 24 }, (_, i) => String(i + 1))}
+                    renderItem={({ item }) => <HourWeatherCard isLoading />}
+                    keyExtractor={(item) => item}
+                    horizontal
+                    contentContainerStyle={s.hourlyWeatherListContent}
+                />
             </View>
         );
     }

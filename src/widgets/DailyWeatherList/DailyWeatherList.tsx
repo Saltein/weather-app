@@ -21,6 +21,17 @@ export const DailyWeatherList = () => {
         data ? data?.hourly : undefined,
     );
 
+    if (isLoading || isFetching) {
+        <View style={s.container}>
+            <FlatList
+                data={Array.from({ length: 14 }, (_, i) => String(i + 1))}
+                renderItem={({ item }) => <DailyWeatherCard isLoading />}
+                keyExtractor={(item) => item}
+                contentContainerStyle={s.dailyWeatherListContent}
+            />
+        </View>;
+    }
+
     return (
         <View style={s.container}>
             <FlatList

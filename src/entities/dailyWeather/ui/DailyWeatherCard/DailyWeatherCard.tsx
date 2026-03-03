@@ -1,15 +1,23 @@
 import { View } from "react-native";
 import { s } from "./DailyWeatherCardStyles";
 import { DailySummary } from "../../../../shared/lib/dailyWeatherToArrayOfObjects";
-import { DefaultText } from "../../../../shared";
+import { DefaultText, Skeleton } from "../../../../shared";
 import { formatDateTime } from "../../../../shared/lib/formatDateTime";
 import { weatherIcons } from "../../../../widgets/Weather/consts/weatherCodes";
 
 interface DailyWeatherCardProps {
-    dailySummary: DailySummary;
+    dailySummary?: DailySummary;
+    isLoading?: boolean;
 }
 
-export const DailyWeatherCard = ({ dailySummary }: DailyWeatherCardProps) => {
+export const DailyWeatherCard = ({
+    dailySummary,
+    isLoading,
+}: DailyWeatherCardProps) => {
+    if (!dailySummary || isLoading) {
+        return <Skeleton style={s.container} />;
+    }
+
     const {
         time,
         weather_code,
