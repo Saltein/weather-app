@@ -5,20 +5,23 @@ import { styles } from "../shared";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { DailyWeatherList } from "../widgets/DailyWeatherList/DailyWeatherList";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
     const { height } = useWindowDimensions();
 
     return (
         <Provider store={store}>
-            <View style={[s.container, { height: height }]}>
-                <Header />
-                <View style={s.pageSpace}>
-                    <Weather />
-                    <DailyWeatherList />
+            <SafeAreaView>
+                <View style={[s.container, { height: height }]}>
+                    <Header />
+                    <View style={s.pageSpace}>
+                        <Weather />
+                        <DailyWeatherList />
+                    </View>
+                    <StatusBar style="auto" />
                 </View>
-                <StatusBar style="auto" />
-            </View>
+            </SafeAreaView>
         </Provider>
     );
 }

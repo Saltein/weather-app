@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { DefaultText, DropDown } from "../../shared";
+import { DropDown } from "../../shared";
 
 export const Header = () => {
     return (
