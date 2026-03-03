@@ -15,7 +15,7 @@ export const DailyWeatherCard = ({
     isLoading,
 }: DailyWeatherCardProps) => {
     if (!dailySummary || isLoading) {
-        return <Skeleton style={s.container} />;
+        return <Skeleton style={[s.container, { height: 40 }]} />;
     }
 
     const {
