@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "weather-app",
+    "name": "weatherApp",
     "slug": "weather-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,9 +12,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.saltein.weatherapp"
     },
     "android": {
+      "package": "com.saltein.weatherapp",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -25,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e185b615-c57a-4c54-9448-3248d458591c"
+      }
     }
   }
 }
