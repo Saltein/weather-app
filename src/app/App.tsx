@@ -12,7 +12,7 @@ export default function App() {
 
     return (
         <Provider store={store}>
-            <SafeAreaView>
+            <SafeAreaView style={s.container}>
                 <View style={[s.container, { height: height }]}>
                     <Header />
                     <View style={s.pageSpace}>

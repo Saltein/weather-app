@@ -65,7 +65,10 @@ export const DropDown = () => {
                     onFocus={() => setIsOpen(true)}
                     onBlur={() => setIsOpen(false)}
                 />
-                <Pressable style={s.clearButton} onPress={() => handleInputChange("")}>
+                <Pressable
+                    style={s.clearButton}
+                    onPress={() => handleInputChange("")}
+                >
                     <ClearIcon
                         width={24}
                         height={24}
@@ -126,7 +129,8 @@ const s = StyleSheet.create({
         borderRadius: styles.radius.md,
         borderWidth: 1,
         borderColor: styles.colors.border,
-        margin: styles.spacing.sm,
+        marginHorizontal: styles.spacing.sm,
+        marginBottom: styles.spacing.sm,
     },
     openButton: {
         width: "100%",
