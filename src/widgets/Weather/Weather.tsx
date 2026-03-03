@@ -1,7 +1,6 @@
 import { FlatList, View } from "react-native";
 import { DefaultText, Skeleton } from "../../shared";
 import { useGetWeatherQuery } from "../../features/weather/model/weatherApiSlice";
-import { useEffect } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { s } from "./WeatherStyles";
 import { weatherCodes, weatherIcons } from "./consts/weatherCodes";
@@ -19,10 +18,6 @@ export const Weather = () => {
             refetchOnReconnect: true,
         },
     );
-
-    useEffect(() => {
-        console.log("data", data);
-    }, [data]);
 
     if (queryParams === skipToken) {
         // нет координат для запроса погоды
