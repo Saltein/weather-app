@@ -10,6 +10,7 @@ import {
     setCity,
 } from "../../../entities/city/model/slice";
 import { useSelector } from "react-redux";
+import CrossIcon from "../../icons/interface/cross.svg";
 
 export const DropDown = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,8 @@ export const DropDown = () => {
 
     const displayValue = selectedCity ? selectedCity.name : searchQuery;
 
+    const ClearIcon = CrossIcon;
+
     return (
         <View style={s.wrapper}>
             <View style={s.openButton}>
@@ -62,6 +65,13 @@ export const DropDown = () => {
                     onFocus={() => setIsOpen(true)}
                     onBlur={() => setIsOpen(false)}
                 />
+                <Pressable style={s.clearButton} onPress={() => handleInputChange("")}>
+                    <ClearIcon
+                        width={24}
+                        height={24}
+                        color={styles.colors.textMain}
+                    />
+                </Pressable>
             </View>
 
             {isOpen && (
@@ -123,7 +133,15 @@ const s = StyleSheet.create({
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: styles.spacing.md,
+        paddingLeft: styles.spacing.lg + 4,
+        paddingRight: styles.spacing.md + 4,
+        flexDirection: "row",
+    },
+    clearButton: {
+        height: "100%",
+        width: 40,
+        alignItems: "center",
+        justifyContent: "center",
     },
     title: {
         fontSize: 18,

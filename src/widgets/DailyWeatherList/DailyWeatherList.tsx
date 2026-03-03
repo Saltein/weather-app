@@ -1,15 +1,15 @@
 import { View, FlatList } from "react-native";
-import { DefaultText } from "../../shared";
 import { s } from "./DailyWeatherListStyles";
 import { useWeatherQueryParams } from "../../features/weather/model/consts/useWeatherQueryParams";
 import { useGetWeatherQuery } from "../../features/weather/model/weatherApiSlice";
 import { dailyWeatherToArrayOfObjects } from "../../shared/lib/dailyWeatherToArrayOfObjects";
 import { DailyWeatherCard } from "../../entities/dailyWeather/ui/DailyWeatherCard/DailyWeatherCard";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 export const DailyWeatherList = () => {
     const queryParams = useWeatherQueryParams();
 
-    const { data, isLoading, isFetching, error, isError } = useGetWeatherQuery(
+    const { data, isLoading, isFetching, isSuccess } = useGetWeatherQuery(
         queryParams,
         {
             refetchOnFocus: true,
@@ -32,6 +32,10 @@ export const DailyWeatherList = () => {
                 />
             </View>
         );
+    }
+
+    if (!data || !isSuccess || queryParams === skipToken) {
+        return null;
     }
 
     return (
