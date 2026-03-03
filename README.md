@@ -36,7 +36,6 @@
 
 # Планы на развитие
   - Добавить геолокацию
-  - Поддержка темной темы
 
 # Скриншоты
 <img height="598" alt="Аккаунты" src="https://github.com/user-attachments/assets/0d1f2e60-4156-471e-8b71-a55d5e399a6b" />
